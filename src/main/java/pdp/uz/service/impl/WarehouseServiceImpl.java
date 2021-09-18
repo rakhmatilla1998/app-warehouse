@@ -88,8 +88,14 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public WarehouseDto deleteWarehouse(Long id) {
-        return null;
+        Optional<Warehouse> optionalWarehouse = warehouseRepo.findById(id);
+        if (!optionalWarehouse.isPresent()) {
+            throw new RuntimeException("Warehouse not found");
+        }
+        WarehouseDto warehouseDto = mapstructMapper.toWarehouseDto(optionalWarehouse.get());
+
+        warehouseRepo.delete(optionalWarehouse.get());
+
+        return warehouseDto;
     }
-
-
 }
