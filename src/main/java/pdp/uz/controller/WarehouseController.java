@@ -28,4 +28,19 @@ public class WarehouseController {
     private WarehouseDto add(@RequestBody WarehouseAddDto dto) {
         return warehouseService.add(dto);
     }
+
+    @GetMapping(value = "/get/warehouse/{id}")
+    private WarehouseDto getWarehouse(@PathVariable Long id) {
+        return warehouseService.getWarehouse(id);
+    }
+
+    @PutMapping(value = "/editWarehouse/{id}")
+    private WarehouseDto edit(@PathVariable Long id, @RequestBody WarehouseAddDto dto) {
+        return warehouseService.editWarehouse(id, dto);
+    }
+
+    @DeleteMapping(value = "/deleteWarehouse/{id}")
+    private WarehouseDto delete(@PathVariable Long id) {
+        return warehouseService.deleteWarehouse(id);
+    }
 }

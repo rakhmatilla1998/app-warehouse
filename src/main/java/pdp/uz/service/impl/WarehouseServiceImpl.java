@@ -43,18 +43,10 @@ public class WarehouseServiceImpl implements WarehouseService {
                 throw new RuntimeException("This name is already exist!");
             }
         }
-//        Warehouse warehouse = new Warehouse();
-//        warehouse.setName(name);
-//        warehouse.setActive(dto.isActive());
 
         Warehouse warehouse = mapstructMapper.toWarehouse(dto);
 
         Warehouse savedWarehouse = warehouseRepo.save(warehouse);
-
-//        WarehouseDto warehouseDto = new WarehouseDto();
-//        warehouseDto.setId(savedWarehouse.getId());
-//        warehouseDto.setName(savedWarehouse.getName());
-//        warehouseDto.setActive(savedWarehouse.getActive());
 
         WarehouseDto warehouseDto = mapstructMapper.toWarehouseDto(savedWarehouse);
 
@@ -68,4 +60,36 @@ public class WarehouseServiceImpl implements WarehouseService {
         }
         return warehouse.getActive();
     }
+
+    @Override
+    public WarehouseDto getWarehouse(Long id) {
+        Optional<Warehouse> optionalWarehouse = warehouseRepo.findById(id);
+        if (optionalWarehouse.isPresent()) {
+            return mapstructMapper.toWarehouseDto(optionalWarehouse.get());
+        }
+        return new WarehouseDto();
+    }
+
+    @Override
+    public WarehouseDto editWarehouse(Long id, WarehouseAddDto dto) {
+        Optional<Warehouse> optionalWarehouse = warehouseRepo.findById(id);
+        if (!optionalWarehouse.isPresent()) {
+            throw new RuntimeException("Warehouse is not found!");
+        } else {
+            Warehouse warehouse = optionalWarehouse.get();
+            warehouse.setName(dto.getName());
+            warehouse.setActive(dto.isActive());
+
+            Warehouse savedWarehouse = warehouseRepo.save(warehouse);
+
+            return mapstructMapper.toWarehouseDto(savedWarehouse);
+        }
+    }
+
+    @Override
+    public WarehouseDto deleteWarehouse(Long id) {
+        return null;
+    }
+
+
 }

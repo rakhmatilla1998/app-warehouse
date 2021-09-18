@@ -14,4 +14,9 @@ public interface WarehouseService {
 
     boolean active(Warehouse warehouse);
 
+    WarehouseDto getWarehouse(Long id);
+
+    WarehouseDto editWarehouse(Long id, WarehouseAddDto dto);
+
+    WarehouseDto deleteWarehouse(Long id);
 }
