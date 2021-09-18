@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WarehouseDto extends AbsDto {
+public class MeasurementDto extends AbsDto {
 
 }

@@ -3,13 +3,8 @@ package pdp.uz.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Getter
 @Setter
-public class WarehouseAddDto implements Serializable {
+public class WarehouseAddDto extends AbsAddDto {
 
-    private String name;
-
-    private boolean active;
 }
