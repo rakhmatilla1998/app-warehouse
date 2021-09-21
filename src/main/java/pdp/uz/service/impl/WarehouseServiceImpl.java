@@ -67,4 +67,16 @@ public class WarehouseServiceImpl implements WarehouseService {
         }
         return warehouse.getActive();
     }
+
+    public Warehouse validate(Long id) {
+        Optional<Warehouse> optionalWarehouse = warehouseRepo.findById(id);
+        if (!optionalWarehouse.isPresent()) {
+            throw new RuntimeException("Warehouse id = " + id + ", not found!");
+        }
+        Warehouse warehouse = optionalWarehouse.get();
+        if (!warehouse.getActive()) {
+            throw new RuntimeException("Category id = " + id + ", is inactive!");
+        }
+        return warehouse;
+    }
 }

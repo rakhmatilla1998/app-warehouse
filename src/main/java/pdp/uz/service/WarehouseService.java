@@ -14,4 +14,6 @@ public interface WarehouseService {
 
     boolean active(Warehouse warehouse);
 
+    Warehouse validate(Long id);
+
 }
