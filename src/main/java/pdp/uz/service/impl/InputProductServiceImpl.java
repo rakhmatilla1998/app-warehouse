@@ -9,6 +9,7 @@ import pdp.uz.helpers.MapstructMapper;
 import pdp.uz.helpers.Utils;
 import pdp.uz.model.InputProductAddDto;
 import pdp.uz.model.InputProductDto;
+import pdp.uz.model.resp.ProductReport;
 import pdp.uz.repository.InputProductRepo;
 import pdp.uz.repository.InputRepo;
 import pdp.uz.service.InputProductService;
@@ -49,25 +50,25 @@ public class InputProductServiceImpl implements InputProductService {
         return mapper.toInputProductDto(inputProductList);
     }
 
-    public InputProduct addOne(InputProductAddDto dto){
+    public InputProduct addOne(InputProductAddDto dto) {
         Long inputId = dto.getInputId();
-        if (Utils.isEmpty(inputId)){
+        if (Utils.isEmpty(inputId)) {
             throw new RuntimeException("Input id should not be null!");
         }
         Long productId = dto.getProductId();
-        if (Utils.isEmpty(productId)){
+        if (Utils.isEmpty(productId)) {
             throw new RuntimeException("Product id should not be null!");
         }
         Double amount = dto.getAmount();
-        if (Utils.isEmpty(amount)){
+        if (Utils.isEmpty(amount)) {
             throw new RuntimeException("Amount should not be null!");
         }
         Double price = dto.getPrice();
-        if (Utils.isEmpty(price)){
+        if (Utils.isEmpty(price)) {
             throw new RuntimeException("Price should not be null!");
         }
         Optional<Input> optionalInput = inputRepo.findById(inputId);
-        if (!optionalInput.isPresent()){
+        if (!optionalInput.isPresent()) {
             throw new RuntimeException("Input id = " + inputId + " not found!");
         }
 
@@ -81,5 +82,21 @@ public class InputProductServiceImpl implements InputProductService {
         inputProduct.setPrice(price);
         inputProduct.setExpireDate(dto.getExpireDate());
         return inputProductRepo.save(inputProduct);
+    }
+
+    @Override
+    public List<ProductReport> get() {
+        LocalDate today = LocalDate.now();
+        return inputProductRepo.findAllByDate(today);
+    }
+
+    @Override
+    public List<ProductReport> get(String date) {
+        try {
+            LocalDate parse = LocalDate.parse(date);
+            return inputProductRepo.findAllByDate(parse);
+        } catch (Exception e) {
+            throw new RuntimeException("Wrong date format is included (User yyyy-mm-dd");
+        }
     }
 }

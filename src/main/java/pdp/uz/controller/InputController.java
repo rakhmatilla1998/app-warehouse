@@ -1,13 +1,12 @@
 package pdp.uz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pdp.uz.model.InputAddDto;
 import pdp.uz.model.InputDto;
 import pdp.uz.service.InputService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/input")
@@ -23,4 +22,6 @@ public class InputController {
     public InputDto add(@RequestBody InputAddDto dto){
         return inputService.add(dto);
     }
+
+
 }

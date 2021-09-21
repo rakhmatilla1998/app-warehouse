@@ -69,4 +69,22 @@ public interface MapstructMapper {
     InputProductDto toInputProductDto(InputProduct inputProduct);
 
     List<InputProductDto> toInputProductDto(List<InputProduct> inputProducts);
+
+    Client toClient(ClientAddDto dto);
+
+    ClientDto toClientDto(Client savedClient);
+
+    @Mapping(target = "currency", source = "currency.name")
+    OutputDto toOutputDto(Output output);
+
+    List<OutputDto> toOutputDto(List<Output> outputs);
+
+    @Mapping(target = "product", source = "product.name")
+    @Mapping(target = "measurement", source = "product.measurement.name")
+    @Mapping(target = "category", source = "product.category.name")
+    @Mapping(target = "outputId", source = "output.id")
+    @Mapping(target = "date", source = "output.date")
+    OutputProductDto toOutputProductDto(OutputProduct outputProduct);
+
+    List<OutputProductDto> toOutputProductDto(List<OutputProduct> outputProducts);
 }

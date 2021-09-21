@@ -1,14 +1,13 @@
 package pdp.uz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pdp.uz.model.InputProductAddDto;
 import pdp.uz.model.InputProductDto;
+import pdp.uz.model.resp.ProductReport;
 import pdp.uz.service.InputProductService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,12 +21,23 @@ public class InputProductController {
     }
 
     @PostMapping("/add")
-    public InputProductDto add(@RequestBody InputProductAddDto dto){
+    public InputProductDto add(@RequestBody InputProductAddDto dto) {
         return inputProductService.add(dto);
     }
 
     @PostMapping("/add/all")
-    public List<InputProductDto> addAll(@RequestBody List<InputProductAddDto> dto){
+    public List<InputProductDto> addAll(@RequestBody List<InputProductAddDto> dto) {
         return inputProductService.addAll(dto);
+    }
+
+    // Dashboarc
+    @GetMapping("/get/today")
+    public List<ProductReport> get() {
+        return inputProductService.get();
+    }
+
+    @GetMapping("/get/date")
+    public List<ProductReport> get(@RequestParam String date) {
+        return inputProductService.get(date);
     }
 }
