@@ -12,4 +12,7 @@ public interface ClientRepo extends JpaRepository<Client, Long> {
 
     @Query("select c from Client c where c.phoneNumber = ?1 and c.active = true")
     Optional<Client> findByPhoneNumber(String phoneNumber);
+
+    boolean existsByPhoneNumberAndIdNot(String phoneNumber, Long id);
+
 }

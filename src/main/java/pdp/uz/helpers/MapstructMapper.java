@@ -15,7 +15,6 @@ public interface MapstructMapper {
 
     Warehouse toWarehouse(WarehouseAddDto dto);
 
-
     WarehouseDto toWarehouseDto(Warehouse warehouse);
 
     List<WarehouseDto> toWarehouseDto(List<Warehouse> warehouses);
@@ -72,6 +71,8 @@ public interface MapstructMapper {
     List<InputProductDto> toInputProductDto(List<InputProduct> inputProducts);
 
     Client toClient(ClientAddDto dto);
+
+    List<ClientDto> toClientDto(List<Client> clients);
 
     ClientDto toClientDto(Client savedClient);
 

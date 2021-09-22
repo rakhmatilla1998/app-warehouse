@@ -90,6 +90,8 @@ public class CategoryServiceImpl implements CategoryService {
         category.setActive(dto.isActive());
         category.setParentCategory(parentCategory);
 
+        categoryRepo.save(category);
+
         return mapstructMapper.toCategoryDto(category);
     }
 
