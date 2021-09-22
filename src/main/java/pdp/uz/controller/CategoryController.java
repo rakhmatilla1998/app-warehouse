@@ -39,7 +39,7 @@ public class CategoryController {
         return categoryService.delete(id);
     }
 
-    @PostMapping(value = "/edit/{id}")
+    @PutMapping(value = "/edit/{id}")
     private CategoryDto edit(@PathVariable Long id, @RequestBody CategoryAddDto dto) {
         return categoryService.edit(id, dto);
     }

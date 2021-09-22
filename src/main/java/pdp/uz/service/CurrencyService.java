@@ -14,4 +14,8 @@ public interface CurrencyService {
     CurrencyDto add(CurrencyAddDto dto);
 
     Currency validate(Long id);
+
+    CurrencyDto delete(Long id);
+
+    CurrencyDto edit(Long id, CurrencyAddDto dto);
 }

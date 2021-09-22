@@ -37,7 +37,7 @@ public class ClientController {
         return clientService.delete(id);
     }
 
-    @PostMapping(value = "/edit/{id}")
+    @PutMapping(value = "/edit/{id}")
     private ClientDto edit(@PathVariable Long id, @RequestBody ClientAddDto dto) {
         return clientService.edit(id, dto);
     }

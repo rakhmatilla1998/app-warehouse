@@ -63,4 +63,24 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
         return currency;
     }
+
+    @Override
+    public CurrencyDto delete(Long id) {
+        Currency currency = validate(id);
+        CurrencyDto currencyDto = mapper.toCurrencyDto(currency);
+
+        currencyRepo.delete(currency);
+
+        return currencyDto;
+    }
+
+    @Override
+    public CurrencyDto edit(Long id, CurrencyAddDto dto) {
+        Currency currency = validate(id);
+
+        currency.setActive(dto.isActive());
+        currency.setName(dto.getName());
+
+        return mapper.toCurrencyDto(currencyRepo.save(currency));
+    }
 }
