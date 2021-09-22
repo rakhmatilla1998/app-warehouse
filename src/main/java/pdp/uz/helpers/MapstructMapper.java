@@ -15,6 +15,7 @@ public interface MapstructMapper {
 
     Warehouse toWarehouse(WarehouseAddDto dto);
 
+
     WarehouseDto toWarehouseDto(Warehouse warehouse);
 
     List<WarehouseDto> toWarehouseDto(List<Warehouse> warehouses);
