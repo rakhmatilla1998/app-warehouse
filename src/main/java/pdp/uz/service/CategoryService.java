@@ -14,5 +14,10 @@ public interface CategoryService {
 
     CategoryDto add(CategoryAddDto dto);
 
+    CategoryDto delete(Long id);
+
+    CategoryDto edit(Long id, CategoryAddDto dto);
+
     Category validate(Long id);
+
 }

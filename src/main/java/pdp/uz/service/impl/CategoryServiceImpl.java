@@ -73,6 +73,27 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public CategoryDto delete(Long id) {
+        Category category = validate(id);
+        CategoryDto categoryDto = mapstructMapper.toCategoryDto(category);
+        categoryRepo.delete(category);
+        return categoryDto;
+    }
+
+    @Override
+    public CategoryDto edit(Long id, CategoryAddDto dto) {
+        Category category = validate(id);
+
+        Category parentCategory = validate(dto.getParentCategoryId());
+
+        category.setName(dto.getName());
+        category.setActive(dto.isActive());
+        category.setParentCategory(parentCategory);
+
+        return mapstructMapper.toCategoryDto(category);
+    }
+
+    @Override
     public Category validate(Long id) {
         Optional<Category> categoryOpt = categoryRepo.findById(id);
         if (!categoryOpt.isPresent()) {
