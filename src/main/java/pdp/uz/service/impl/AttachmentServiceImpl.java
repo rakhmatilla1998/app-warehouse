@@ -6,12 +6,14 @@ import org.springframework.web.multipart.MultipartFile;
 import pdp.uz.entity.Attachment;
 import pdp.uz.entity.AttachmentContent;
 import pdp.uz.helpers.MapstructMapper;
+import pdp.uz.model.AttachmentAddDto;
 import pdp.uz.model.AttachmentDto;
 import pdp.uz.repository.AttachmentContentRepo;
 import pdp.uz.repository.AttachmentRepo;
 import pdp.uz.service.AttachmentService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,4 +60,39 @@ public class AttachmentServiceImpl implements AttachmentService {
         }
         return attachmentOpt.get();
     }
+
+    @Override
+    public List<AttachmentDto> getAttachments() {
+        return mapstructMapper.toAttachmentDto(attachmentRepo.findAll());
+    }
+
+    @Override
+    public AttachmentDto getAttachment(Long id) {
+        Attachment attachment = validate(id);
+        return mapstructMapper.toAttachmentDto(attachment);
+    }
+
+    @Override
+    public AttachmentDto delete(Long id) {
+        Attachment attachment = validate(id);
+        AttachmentDto attachmentDto = mapstructMapper.toAttachmentDto(attachment);
+
+        attachmentRepo.delete(attachment);
+
+        return attachmentDto;
+    }
+
+    @Override
+    public AttachmentDto edit(Long id, AttachmentAddDto dto) {
+        Attachment attachment = validate(id);
+
+        attachment.setContentType(dto.getContentType());
+        attachment.setName(dto.getName());
+        attachment.setSize(dto.getSize());
+
+        Attachment savedAttachment = attachmentRepo.save(attachment);
+
+        return mapstructMapper.toAttachmentDto(savedAttachment);
+    }
+
 }

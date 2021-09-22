@@ -89,4 +89,6 @@ public interface MapstructMapper {
     OutputProductDto toOutputProductDto(OutputProduct outputProduct);
 
     List<OutputProductDto> toOutputProductDto(List<OutputProduct> outputProducts);
+
+    List<AttachmentDto> toAttachmentDto(List<Attachment> all);
 }
