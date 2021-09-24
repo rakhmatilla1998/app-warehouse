@@ -30,7 +30,7 @@ public class InputProductController {
         return inputProductService.addAll(dto);
     }
 
-    // Dashboarc
+    // Dashboard
     @GetMapping("/get/today")
     public List<ProductReport> get() {
         return inputProductService.get();
@@ -41,5 +41,13 @@ public class InputProductController {
         return inputProductService.get(date);
     }
 
+    @DeleteMapping(value = "/delete/{id}")
+    private InputProductDto delete(@PathVariable Long id) {
+        return inputProductService.delete(id);
+    }
 
+    @PutMapping(value = "/edit/{id}")
+    private InputProductDto edit(@PathVariable Long id, @RequestBody InputProductAddDto dto) {
+        return inputProductService.edit(id, dto);
+    }
 }

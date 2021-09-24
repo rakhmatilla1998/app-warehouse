@@ -1,5 +1,6 @@
 package pdp.uz.service;
 
+import pdp.uz.entity.InputProduct;
 import pdp.uz.model.InputProductAddDto;
 import pdp.uz.model.InputProductDto;
 import pdp.uz.model.resp.ProductReport;
@@ -15,4 +16,10 @@ public interface InputProductService {
     List<ProductReport> get();
 
     List<ProductReport> get(String date);
+
+    InputProductDto delete(Long id);
+
+    InputProductDto edit(Long id, InputProductAddDto dto);
+
+    InputProduct validate(Long id);
 }
