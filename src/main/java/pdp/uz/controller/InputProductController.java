@@ -40,4 +40,6 @@ public class InputProductController {
     public List<ProductReport> get(@RequestParam String date) {
         return inputProductService.get(date);
     }
+
+
 }

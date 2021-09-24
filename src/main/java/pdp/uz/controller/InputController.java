@@ -23,5 +23,23 @@ public class InputController {
         return inputService.add(dto);
     }
 
+    @GetMapping(value = "/getInputs")
+    private List<InputDto> getInputs() {
+        return inputService.getInputs();
+    }
 
+    @GetMapping(value = "/getInput/{id}")
+    private InputDto getInput(@PathVariable Long id) {
+        return inputService.getInput(id);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    private InputDto deleteInput(@PathVariable Long id) {
+        return inputService.deleteInput(id);
+    }
+
+    @PutMapping(value = "/edit/{id}")
+    private InputDto editInput(@PathVariable Long id, @RequestBody InputAddDto dto) {
+        return inputService.edit(id, dto);
+    }
 }
